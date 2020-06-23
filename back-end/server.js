@@ -1,8 +1,13 @@
 const express = require('express');
 const Papa  = require("papaparse");
 const fs = require("fs");
-const app = express();
+const bodyParser = require("body-parser");
 
+const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/tests', {
@@ -53,7 +58,27 @@ const Item = mongoose.model('Item', ItemSchema);
 
 app.post('/api/grade/', async (req,res) => {
 	try{
-		console.log(req.body);
+		console.log(req.body.map);
+		let answers = req.body.map;
+		let incorrectItems = [];
+		let correct = 0;
+		for (answer in answers)
+		{
+			//console.log(answer);// item ID
+			//console.log(answers[answer]); //Answer text
+			let item = await Item.findOne({
+				_id:answer,
+			});
+			if (item.c != answers[answer]){
+				incorrectItems.push(answer);
+			}
+			else if (item.c == answers[answer]){
+				correct++;
+			}
+		}
+		console.log(incorrectItems);
+		console.log("correct: " + correct);
+		 res.send(incorrectItems);
 	}catch(error){
 		console.log(error);
 		res.sendStatus(500);
@@ -139,7 +164,7 @@ app.get("/api/tests/:id/", async(req,res) =>{
 			}
 			item.options = options;
 		})
-		console.log(items);
+		//console.log(items);
 		return res.send(items)
 	} catch(error){
 		console.log(error);
