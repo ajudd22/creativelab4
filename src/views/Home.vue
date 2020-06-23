@@ -1,18 +1,45 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div id = "button-container">
+      <router-link tag="p" class="link" to="/tests">Tests</router-link>
+      <router-link tag="p" class="link" to="/admin">Admin</router-link>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
-  }
 }
 </script>
+<style>
+.link{
+  background-color: indianred;
+  padding-left:50px;
+  padding-right:50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 10px;
+  width: 30%;
+  font-color: black;
+  font-size: 26px;
+}
+.link:hover{
+  background-color:#f6de72;
+  cursor:pointer;
+}
+#button-container{
+padding-top: 40px;
+padding-bottom: 40px;
+display:flex;
+flex-wrap: no-wrap;
+flex-direction: row;
+justify-content: space-around;
+
+
+}
+.home{
+height: 100%;
+}
+</style>
