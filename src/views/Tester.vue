@@ -2,7 +2,7 @@
   <div id= "tester">
     <h1>{{this.headingMessage}}</h1>
   <form>
-    <div :class = "{wrong: item.v} " v-for= "item in items" :key="item.id" >
+    <div :class = "{wrong: item.v, right: !item.v}" v-for= "item in items" :key="item.id" >
       <h5 class = "question-head">{{item.head}}</h5>
         <div class = "option"  v-for= "option in item.options" :key= "option">
           <input class = "button" type= "radio"  :id= "option" :name = "item.id + '-op'" :ref="item.id">
@@ -132,10 +132,18 @@ h1{
   float:right;
 
 }
+.right{
+width:40%;
+margin-left: 30%;
+display:block;
+}
 .wrong{
   border: 1px solid red;
   border-radius: 5px;
   margin: 10px;
+  width:40%;
+  margin-left: 30%;
+  display:block;
 }
 .option-label{
   text-align: left;

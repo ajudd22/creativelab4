@@ -58,7 +58,7 @@ const Item = mongoose.model('Item', ItemSchema);
 
 app.post('/api/grade/', async (req,res) => {
 	try{
-		console.log(req.body.map);
+		//console.log(req.body.map);
 		let answers = req.body.map;
 		let incorrectItems = [];
 		let correct = 0;
@@ -76,8 +76,8 @@ app.post('/api/grade/', async (req,res) => {
 				correct++;
 			}
 		}
-		console.log(incorrectItems);
-		console.log("correct: " + correct);
+		//console.log(incorrectItems);
+		//console.log("correct: " + correct);
 		 res.send(incorrectItems);
 	}catch(error){
 		console.log(error);
